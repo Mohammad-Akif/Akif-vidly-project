@@ -17,7 +17,14 @@ router.get("/", async (req, res) => {
     .skip(skip)
     .limit(limit)
     .sort(sort)
-  res.send(movies);
+
+  const totalMovies = await Movie.count();
+  const data = {
+    movies,
+    totalMovies
+  }
+
+  res.send(data);
 });
 
 router.post("/", [auth], async (req, res) => {
