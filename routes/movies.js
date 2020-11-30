@@ -3,15 +3,20 @@ const { Genre } = require("../models/genre");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const validateObjectId = require("../middleware/validateObjectId");
+const { getPaginationFilters } = require('../utills/helpers');
 const moment = require("moment");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+  const { skip, limit, sort } = getPaginationFilters(req.query);
+
   const movies = await Movie.find()
     .select("-__v")
-    .sort("name");
+    .skip(skip)
+    .limit(limit)
+    .sort(sort)
   res.send(movies);
 });
 
