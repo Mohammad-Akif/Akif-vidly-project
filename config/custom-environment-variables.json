@@ -1,4 +1,5 @@
 {
   "jwtPrivateKey": "vidly_jwtPrivateKey",
-  "db": "mongodb://akif:12345@cluster0-shard-00-00-fxdlw.mongodb.net:27017,cluster0-shard-00-01-fxdlw.mongodb.net:27017,cluster0-shard-00-02-fxdlw.mongodb.net:27017/vidly?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
+  "db": "mongodb://akif:12345@cluster0-shard-00-00-fxdlw.mongodb.net:27017,cluster0-shard-00-01-fxdlw.mongodb.net:27017,cluster0-shard-00-02-fxdlw.mongodb.net:27017/vidly?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "basePath": "https://blooming-refuge-01778.herokuapp.com"
 }

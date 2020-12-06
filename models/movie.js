@@ -27,6 +27,10 @@ const Movie = mongoose.model(
       required: true,
       min: 0,
       max: 255
+    },
+    imageUrl: {
+      type: String,
+      required: true
     }
   })
 );
@@ -43,6 +47,8 @@ function validateMovie(movie) {
       .required(),
     dailyRentalRate: Joi.number()
       .min(0)
+      .required(),
+    imageUrl: Joi.string()
       .required()
   };
 
