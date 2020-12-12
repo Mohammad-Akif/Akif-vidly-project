@@ -7,7 +7,6 @@ router.get("/", auth, async (req, res) => {
   const customers = await Customer.find()
     .select("-__v")
     .sort("name");
-  console.log(customers);
   res.send(customers);
 });
 

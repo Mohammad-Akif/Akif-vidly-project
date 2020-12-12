@@ -9,7 +9,7 @@ const fs = require('fs');
 const async = require('async');
 const AppError = require("../utills/appError");
 
-router.get("/", async (req, res) => {
+router.get("/", [auth, admin], async (req, res) => {
   const images = await Image.find().select("-__v")
   const data = { images };
 
@@ -50,7 +50,7 @@ router.delete('/:id', [auth, admin, validateObjectId], async (req, res) => {
   });
 });
 
-router.get("/:id", validateObjectId, async (req, res) => {
+router.get("/:id", [auth, admin, validateObjectId], async (req, res) => {
   const image = await Image.findById(req.params.id).select("-__v");
 
   if (!image)

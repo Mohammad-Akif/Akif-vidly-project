@@ -27,8 +27,19 @@ router.get("/", async (req, res) => {
   res.send(data);
 });
 
+router.get("/search", async (req, res) => {
+  const movies = await
+    Movie
+      .find({ title: { $regex: req.query.title || '', $options: 'i' } })
+      .select("-__v")
+
+  const data = {
+    movies
+  }
+  res.send(data);
+});
+
 router.post("/", [auth], async (req, res) => {
-  console.log(req.body);
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -43,10 +54,11 @@ router.post("/", [auth], async (req, res) => {
     },
     numberInStock: req.body.numberInStock,
     dailyRentalRate: req.body.dailyRentalRate,
-    publishDate: moment().toJSON()
+    publishDate: moment().toJSON(),
+    imageUrl: req.body.imageUrl
   });
-  await movie.save();
 
+  await movie.save();
   res.send(movie);
 });
 
@@ -66,7 +78,8 @@ router.put("/:id", [auth], async (req, res) => {
         name: genre.name
       },
       numberInStock: req.body.numberInStock,
-      dailyRentalRate: req.body.dailyRentalRate
+      dailyRentalRate: req.body.dailyRentalRate,
+      imageUrl: req.body.imageUrl
     },
     { new: true }
   );
